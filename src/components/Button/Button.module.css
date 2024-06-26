@@ -12,6 +12,7 @@
     border: none;
     outline: none;
     position: relative;
+    cursor: pointer;
 }
 
 .label{
@@ -76,14 +77,17 @@ background-color: rgba(255, 255, 255, 0.08);
     transform: scale(.85);
 }
 
-.primary:disabled{
-    background-color: rgba(255, 119, 0, .36);
+.secondary:disabled, .primary:disabled{
+    cursor: default;
     pointer-events: none;
 }
 
+.primary:disabled{
+    background-color: rgba(255, 119, 0, .36); 
+}
+
 .secondary:disabled {
-    opacity: .36;
-    pointer-events: none;
+    opacity: .36;   
 }
 
 .primary.isLoading::before,.secondary.isLoading::before{

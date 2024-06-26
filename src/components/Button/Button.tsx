@@ -14,9 +14,8 @@ type TButton = {
   isLoading?: boolean;
   label?: string;
   type?: "submit" | "button" | "reset" | undefined;
+  tabIndex?: number;
 };
-
-const ButtonContext = createContext<any>(null);
 
 export default function Button({
   counter,
@@ -29,6 +28,7 @@ export default function Button({
   isLoading,
   label,
   type,
+  tabIndex,
 }: TButton) {
   const classes = classNames({
     [styles.button]: true,
@@ -42,22 +42,22 @@ export default function Button({
   });
 
   return (
-    <ButtonContext.Provider value={{ colorStyle }}>
-      <button
-        type={type}
-        onClick={onClick}
-        disabled={isDisabled || isLoading}
-        className={classes}
-      >
-        <div className={`${styles.label} ${isLoading && styles.opacity_0}`}>
-          {label}
-        </div>
-        <div className={`${isLoading && styles.opacity_0}`}>
-          {counter && children}
-        </div>
-        {isLoading && <div className={styles.loader}></div>}
-      </button>
-    </ButtonContext.Provider>
+    <button
+      aria-disabled={isDisabled || isLoading}
+      tabIndex={tabIndex}
+      type={type}
+      onClick={onClick}
+      disabled={isDisabled || isLoading}
+      className={classes}
+    >
+      <div className={`${styles.label} ${isLoading && styles.opacity_0}`}>
+        {label}
+      </div>
+      <div className={`${isLoading && styles.opacity_0}`}>
+        {counter && children}
+      </div>
+      {isLoading && <div className={styles.loader}></div>}
+    </button>
   );
 }
 
